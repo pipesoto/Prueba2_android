@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GestionEquipos</string>
+    <string name="etLoginUsuarioHint">Usuario</string>
+    <string name="etLoginClaveHint">Clave</string>
+    <string name="btnLoginIngresar">Ingresar</string>
+    <string name="btnLoginCancelar">Cancelar</string>
+    <string name="tvIngreso">Ingreso</string>
+</resources>
