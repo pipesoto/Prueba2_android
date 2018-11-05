@@ -15,20 +15,20 @@ public class BaseDatos {
 
 
     public static void cargarDatos(){
-        losUsuarios.add(new Usuario("prueba1","nombre1","apellido1","Finanzas","123"));
-        losUsuarios.add(new Usuario("prueba2","nombre2","apellido2","Informatica","123"));
-        losUsuarios.add(new Usuario("prueba3","nombre3","apellido3","Gerencia","123"));
+        losUsuarios.add(new Usuario("user1","Juan","García","Finanzas","123"));
+        losUsuarios.add(new Usuario("user2","Jose","Perez","Informatica","123"));
+        losUsuarios.add(new Usuario("user3","Guillermo","Hernandez","Gerencia","123"));
 
-        losEquipos.add(new Equipo("MON12345","Monitor Bajo Costo",25000));
-        losEquipos.add(new Equipo("MOU12345","Mouse Inalámbrico",5000));
-        losEquipos.add(new Equipo("NOT12345","Notebook Dell Empresarial",400000));
-        losEquipos.add(new Equipo("TJT12345","Tarjeta de red",30000));
-        losEquipos.add(new Equipo("AUD12345","Audífonos Clear Conference",20000));
-        losEquipos.add(new Equipo("BAT12345","Batería Externa Emergency",15000));
-        losEquipos.add(new Equipo("NOT54321","Notebook Marca BaratoBarato",100000));
-        losEquipos.add(new Equipo("CAU12345","Caucho Repuesto",50000));
-        losEquipos.add(new Equipo("PER12345","Perro Peluche p/Suerte",25000));
-        losEquipos.add(new Equipo("FOR12345","Fórmula secreta para adelgazar",500000));
+        losEquipos.add(new Equipo("12345MON","Monitor Bajo Costo",25000));
+        losEquipos.add(new Equipo("12345MOU","Mouse Inalámbrico",5000));
+        losEquipos.add(new Equipo("12345NOT","Notebook Dell Empresarial",400000));
+        losEquipos.add(new Equipo("12345TJT","Tarjeta de red",30000));
+        losEquipos.add(new Equipo("12345AUD","Audífonos Clear Conference",20000));
+        losEquipos.add(new Equipo("12345BAT","Batería Externa Emergency",15000));
+        losEquipos.add(new Equipo("12345NOT2","Notebook Marca BaratoBarato",100000));
+        losEquipos.add(new Equipo("12345CAU","Caucho Repuesto",50000));
+        losEquipos.add(new Equipo("12345CON","Pata Conejo p/Suerte",25000));
+        losEquipos.add(new Equipo("12345FOR","Fórmula secreta para adelgazar",500000));
     }
 
     public static List<Equipo> equiposPorUsuario(String usuario){

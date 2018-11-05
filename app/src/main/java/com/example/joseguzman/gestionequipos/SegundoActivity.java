@@ -21,6 +21,7 @@ import java.util.List;
 public class SegundoActivity extends AppCompatActivity {
     TextView tvDptoUsuario;
     TextView tvNombreUsuario;
+    TextView tvTotalMonto;
     ListView lvEquiposCargo;
     Button btnCargarEquipo;
     Button btnDescargarEquipo;
@@ -41,6 +42,7 @@ public class SegundoActivity extends AppCompatActivity {
 
         tvDptoUsuario = (TextView) findViewById(R.id.tvDptoUsuario);
         tvNombreUsuario = (TextView) findViewById(R.id.tvNombreUsuario);
+        tvTotalMonto = (TextView) findViewById(R.id.tvTotalMonto);
         lvEquiposCargo = (ListView) findViewById(R.id.lvEquiposCargo);
         btnCargarEquipo = (Button) findViewById(R.id.btnCargarEquipo);
         btnDescargarEquipo = (Button) findViewById(R.id.btnDescargarEquipo);
@@ -69,21 +71,34 @@ public class SegundoActivity extends AppCompatActivity {
 
 
 
-
         btnCargarEquipo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Equipo e = BaseDatos.buscarEquipo(autoTvNroSerie.getText().toString());
-                if(e!=null){
-                    BaseDatos.cargarEquipoAlUsuario(usuario.getUsuario(),e.getSerie());
-                    actualizarVistas(usuario);
-                    autoTvNroSerie.setText("");
-                    tvDescEquipo.setText("");
-                    tvValorEquipo.setText("");
+
+                if (e != null) { //Si la variable e no es NULL es porque el Equipo sí existe y se procede.
+                    boolean disponible = false;
+                    //Se busca número de Serie proporcionado entre los equipos disponibles
+                    for (Equipo equipo : BaseDatos.equiposDisponibles()
+                            ) {
+                        if (equipo.getSerie().equals(e.getSerie())) {
+                            disponible = true;
+                        }
+                    }
+                    if (disponible) {
+                        BaseDatos.cargarEquipoAlUsuario(usuario.getUsuario(), e.getSerie());
+                        actualizarVistas(usuario);
+                        autoTvNroSerie.setText("");
+                        tvDescEquipo.setText("");
+                        tvValorEquipo.setText("");
+                    } else {
+                        autoTvNroSerie.setError(getResources().getString(R.string.autoTvSerieErrorYaAsignado));
+                    }
+                } else { //En caso de ser NULL significa que el Equipo no existe, y se le asigna el error correpondiente!
+                    autoTvNroSerie.setError(getResources().getString(R.string.autoTvSerieErrorNoExiste));
                 }
             }
         });
-
 
 
         lvEquiposCargo.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -104,7 +119,6 @@ public class SegundoActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     public void actualizarVistas(Usuario usuario){
@@ -112,6 +126,15 @@ public class SegundoActivity extends AppCompatActivity {
         equiposAsig = BaseDatos.equiposPorUsuario(usuario.getUsuario());
         adapter = new ArrayAdapter<Equipo>(this, android.R.layout.simple_list_item_1,equiposAsig);
         lvEquiposCargo.setAdapter(adapter);
+
+
+        //ACTUALIZAR EL MONTO TOTAL DE EQUIPOS CARGADOS A USUARIO
+        double total = 0;
+        for (Equipo equipo : equiposAsig
+             ) {
+            total = total + equipo.getValor();
+        }
+        tvTotalMonto.setText("$ " + total);
 
 
         //ADAPTANDO LOS EQUIPOS DISPONIBLES PARA QUE SOLO MUESTRE LOS NUMEROS DE SERIE EN EL AUTOCOMPLETETEXTVIEW
@@ -122,9 +145,7 @@ public class SegundoActivity extends AppCompatActivity {
         }
         adapterAutoComplete = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, seriesDisp);
         autoTvNroSerie.setAdapter(adapterAutoComplete);
+
     }
-
-
-
 
 }
