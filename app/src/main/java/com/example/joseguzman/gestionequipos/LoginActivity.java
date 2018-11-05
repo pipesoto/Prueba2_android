@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.joseguzman.gestionequipos.Data.BaseDatos;
 import com.example.joseguzman.gestionequipos.Modelo.Usuario;
@@ -43,8 +44,10 @@ public class LoginActivity extends AppCompatActivity {
                 String clav = etLoginClave.getText().toString();
                 if(us.isEmpty()){
                     etLoginUsuario.setError(getResources().getString(R.string.ErrorUsuarioVacio));
+                    Toast.makeText(view.getContext(),getResources().getString(R.string.ErrorUsuarioVacio), Toast.LENGTH_SHORT );
                 }else if(clav.isEmpty()){
                     etLoginClave.setError(getResources().getString(R.string.ErrorClaveVacia));
+                    Toast.makeText(view.getContext(),getResources().getString(R.string.ErrorClaveVacia), Toast.LENGTH_SHORT );
                 }else{
                     boolean existe = false;
                     for (Usuario u:losUsuarios
@@ -60,12 +63,14 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             //Clave no es correcta
                             etLoginClave.setError(getResources().getString(R.string.ErrorClaveIncorrecta));
+                            Toast.makeText(view.getContext(),getResources().getString(R.string.ErrorClaveIncorrecta), Toast.LENGTH_SHORT );
                             break;
                         }
                     }
                     //Usuario no existe
                     if(!existe){
                         etLoginUsuario.setError(getResources().getString(R.string.ErrorUsuarioNoExiste));
+                        Toast.makeText(view.getContext(),getResources().getString(R.string.ErrorUsuarioNoExiste), Toast.LENGTH_SHORT );
                     }
                 }
             }

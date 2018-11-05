@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Equipment Management</string>
+    <string name="etLoginUsuarioHint">Username</string>
+    <string name="etLoginClaveHint">Password</string>
+    <string name="btnLoginIngresar">Login</string>
+    <string name="btnLoginCancelar">Cancel</string>
+    <string name="tvIngreso">Login</string>
+    <string name="ErrorUsuarioNoExiste">User do not exist!</string>
+    <string name="ErrorClaveIncorrecta">Invalid Password</string>
+    <string name="ErrorUsuarioVacio">Introduce the User</string>
+    <string name="ErrorClaveVacia">Introduce the Password</string>
+    <string name="tvNombreUsuario">Username</string>
+    <string name="tvDptoUsuario">User Department</string>
+    <string name="tvTituloLista">Equipment in charge:</string>
+    <string name="btnFinalizar">Close</string>
+    <string name="tvEtqDescEquipo">Description:</string>
+    <string name="tvEtqValorEquipo">Value:</string>
+    <string name="autoTvNroSerieHint">Introduce Equipment serial number</string>
+    <string name="tvEtiquetaTotal">Total:</string>
+    <string name="autoTvSerieErrorNoExiste">Equipment serial do not exist</string>
+    <string name="autoTvSerieErrorYaAsignado">Equiptment is already assigned to a User</string>
+    <string name="alertDescargaTitulo">Warning</string>
+    <string name="alertDescargaMensaje">¿Are you sure to remove the equipment from the user?</string>
+</resources>

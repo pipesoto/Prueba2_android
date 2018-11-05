@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GestionEquipos</string>
+    <string name="app_name">Gestión Equipos</string>
     <string name="etLoginUsuarioHint">Usuario</string>
     <string name="etLoginClaveHint">Clave</string>
     <string name="btnLoginIngresar">Ingresar</string>
@@ -16,9 +16,9 @@
     <string name="tvEtqDescEquipo">Descripción:</string>
     <string name="tvEtqValorEquipo">Valor:</string>
     <string name="autoTvNroSerieHint">Ingrese nro serie de Equipo</string>
-    <string name="btnCargarEquipo">+</string>
-    <string name="btnDescargarEquipo">-</string>
     <string name="tvEtiquetaTotal">Total:</string>
     <string name="autoTvSerieErrorNoExiste">Serie de Equipo no existe</string>
     <string name="autoTvSerieErrorYaAsignado">El Equipo ya está asignado a un Usuario</string>
+    <string name="alertDescargaTitulo">Advertencia</string>
+    <string name="alertDescargaMensaje">¿Está seguro que desea quitar el Equipo del Usuario?</string>
 </resources>

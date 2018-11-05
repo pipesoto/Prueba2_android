@@ -1,5 +1,8 @@
 package com.example.joseguzman.gestionequipos;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,9 +34,14 @@ public class SegundoActivity extends AppCompatActivity {
     Button btnFinalizar;
 
     List<Equipo> equiposAsig;
+    List<String> seriesDisp = new ArrayList<>();
 
-    ListAdapter adapter;
+    ArrayAdapter adapter;
     ArrayAdapter adapterAutoComplete;
+
+    AlertDialog.Builder builder;
+
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +60,20 @@ public class SegundoActivity extends AppCompatActivity {
         btnFinalizar = (Button) findViewById(R.id.btnFinalizar);
 
         //TOMANDO LOS DATOS DEL USUARIO QUE HIZO LOGIN
-        final Usuario usuario = (Usuario) getIntent().getExtras().getSerializable("usuario");
+        usuario = (Usuario) getIntent().getExtras().getSerializable("usuario");
         tvNombreUsuario.setText(usuario.getNombre() + " " + usuario.getApellido());
         tvDptoUsuario.setText(usuario.getDepartamento());
 
         actualizarVistas(usuario);
 
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(this);
+        }
+        builder.setTitle(getResources().getString(R.string.alertDescargaTitulo))
+                .setMessage(getResources().getString(R.string.alertDescargaMensaje))
+                .setIcon(android.R.drawable.ic_dialog_alert);
 
         autoTvNroSerie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,8 +83,6 @@ public class SegundoActivity extends AppCompatActivity {
                 tvValorEquipo.setText(e.getValor()+"");
             }
         });
-
-
 
         btnCargarEquipo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,13 +113,22 @@ public class SegundoActivity extends AppCompatActivity {
             }
         });
 
-
         lvEquiposCargo.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Equipo e = (Equipo) lvEquiposCargo.getItemAtPosition(position);
-                BaseDatos.descargarEquipoAlUsuario(usuario.getUsuario(),e.getSerie());
-                actualizarVistas(usuario);
+            public boolean onItemLongClick(AdapterView<?> parent, View view,int position, long id) {
+                final Equipo e = (Equipo) lvEquiposCargo.getItemAtPosition(position);
+                builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Eliminar
+                        BaseDatos.descargarEquipoAlUsuario(usuario.getUsuario(),e.getSerie());
+                       actualizarVistas(usuario);
+                    }
+                })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Nada
+                            }
+                        }).show();
                 return false;
             }
         });
@@ -117,35 +139,36 @@ public class SegundoActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 
     public void actualizarVistas(Usuario usuario){
         //CREANDO ADAPTADOR PARA MOSTRAR LISTA DE EQUIPOS ASIGNADOS A UN USUARIO
+        lvEquiposCargo.setAdapter(null);
         equiposAsig = BaseDatos.equiposPorUsuario(usuario.getUsuario());
         adapter = new ArrayAdapter<Equipo>(this, android.R.layout.simple_list_item_1,equiposAsig);
         lvEquiposCargo.setAdapter(adapter);
 
-
         //ACTUALIZAR EL MONTO TOTAL DE EQUIPOS CARGADOS A USUARIO
         double total = 0;
         for (Equipo equipo : equiposAsig
-             ) {
+                ) {
             total = total + equipo.getValor();
         }
         tvTotalMonto.setText("$ " + total);
 
-
         //ADAPTANDO LOS EQUIPOS DISPONIBLES PARA QUE SOLO MUESTRE LOS NUMEROS DE SERIE EN EL AUTOCOMPLETETEXTVIEW
-        List<String> seriesDisp = new ArrayList<>();
+        seriesDisp.clear();
         for (Equipo e : BaseDatos.equiposDisponibles()
                 ) {
             seriesDisp.add(e.getSerie());
         }
         adapterAutoComplete = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, seriesDisp);
         autoTvNroSerie.setAdapter(adapterAutoComplete);
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 }
