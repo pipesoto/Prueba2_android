@@ -1,10 +1,20 @@
 package com.example.joseguzman.gestionequipos.Modelo;
 
-public class Usuario {
+import java.io.Serializable;
 
-    private String usuario, nombre, apellido, departamento;
+public class Usuario implements Serializable{
+
+    private String usuario, nombre, apellido, departamento, clave;
 
     public Usuario() {
+    }
+
+    public Usuario(String usuario, String nombre, String apellido, String departamento, String clave) {
+        this.usuario = usuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.departamento = departamento;
+        this.clave = clave;
     }
 
     public String getUsuario() {
@@ -13,6 +23,14 @@ public class Usuario {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     public String getNombre() {

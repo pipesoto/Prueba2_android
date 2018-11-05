@@ -1,11 +1,19 @@
 package com.example.joseguzman.gestionequipos.Modelo;
 
-public class Equipo {
+import java.io.Serializable;
+
+public class Equipo implements Serializable{
 
     private String serie, descripción;
     private double valor;
 
     public Equipo() {
+    }
+
+    public Equipo(String serie, String descripción, double valor) {
+        this.serie = serie;
+        this.descripción = descripción;
+        this.valor = valor;
     }
 
     public String getSerie() {
@@ -30,5 +38,10 @@ public class Equipo {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    @Override
+    public String toString() {
+        return descripción + " - $" + valor;
     }
 }
