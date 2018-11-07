@@ -27,7 +27,6 @@ public class SegundoActivity extends AppCompatActivity {
     TextView tvTotalMonto;
     ListView lvEquiposCargo;
     Button btnCargarEquipo;
-    Button btnDescargarEquipo;
     AutoCompleteTextView autoTvNroSerie;
     TextView tvDescEquipo;
     TextView tvValorEquipo;
@@ -53,7 +52,6 @@ public class SegundoActivity extends AppCompatActivity {
         tvTotalMonto = (TextView) findViewById(R.id.tvTotalMonto);
         lvEquiposCargo = (ListView) findViewById(R.id.lvEquiposCargo);
         btnCargarEquipo = (Button) findViewById(R.id.btnCargarEquipo);
-        btnDescargarEquipo = (Button) findViewById(R.id.btnDescargarEquipo);
         autoTvNroSerie = (AutoCompleteTextView) findViewById(R.id.autoTvNroSerie);
         tvDescEquipo = (TextView) findViewById(R.id.tvDescEquipo);
         tvValorEquipo = (TextView) findViewById(R.id.tvValorEquipo);

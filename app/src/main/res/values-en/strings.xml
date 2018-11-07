@@ -16,7 +16,7 @@
     <string name="btnFinalizar">Close</string>
     <string name="tvEtqDescEquipo">Description:</string>
     <string name="tvEtqValorEquipo">Value:</string>
-    <string name="autoTvNroSerieHint">Introduce Equipment serial number</string>
+    <string name="autoTvNroSerieHint">Introduce Equipment serial</string>
     <string name="tvEtiquetaTotal">Total:</string>
     <string name="autoTvSerieErrorNoExiste">Equipment serial do not exist</string>
     <string name="autoTvSerieErrorYaAsignado">Equiptment is already assigned to a User</string>
